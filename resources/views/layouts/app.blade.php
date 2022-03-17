@@ -53,6 +53,9 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('products.create') }}">{{ __('Create Product') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('products.index') }}">{{ __('Products') }}</a>
                             </li>
                             <li class="nav-item dropdown">
