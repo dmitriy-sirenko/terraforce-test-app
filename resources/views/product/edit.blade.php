@@ -10,7 +10,7 @@
                 <input type="input" class="form-control" id="name" name="name" aria-describedby="name" value="{{ $product->name }}">
             </div>
             <div class="form-group">
-                <label for="price">Product Name</label>
+                <label for="price">Price</label>
                 <input type="input" class="form-control" id="price" aria-describedby="price" name="price" value="{{ $product->price }}">
             </div>
             <div class="form-group">
