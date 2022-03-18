@@ -7,11 +7,11 @@
             <input type="hidden" name="_method" value="PATCH">
             <div class="form-group">
                 <label for="name">Product Name</label>
-                <input type="input" class="form-control" id="name" name="name" aria-describedby="name" value="{{ $product->name }}">
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value="{{ $product->name }}">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="input" class="form-control" id="price" aria-describedby="price" name="price" value="{{ $product->price }}">
+                <input type="text" class="form-control" id="price" aria-describedby="price" name="price" value="{{ $product->price }}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
