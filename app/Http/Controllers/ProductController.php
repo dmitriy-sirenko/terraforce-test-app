@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index', ['products' => Auth::user()->products()->get()]);
+        return view('product.index', ['products' => Auth::user()->products()->paginate(10)]);
     }
 
     /**
@@ -51,10 +51,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if (Auth::user()->id == $product->user_id) {
-            return view('product.show', ['product' => $product]);
-        }
-        return back();
+        $this->authorize('show', $product);
+        return view('product.show', ['product' => $product]);
     }
 
     /**
@@ -65,10 +63,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if (Auth::user()->id == $product->user_id) {
-            return view('product.edit', ['product' => $product]);
-        }
-        return back();
+        $this->authorize('edit', $product);
+        return view('product.edit', ['product' => $product]);
     }
 
     /**
@@ -80,14 +76,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        if (Auth::user()->id == $product->user_id) {
-            $product->name = $request->get('name');
-            $product->description = $request->get('description');
-            $product->price = $request->get('price');
-            $product->save();
-            return redirect()->route('products.index');
-        }
-        return back();
+        $this->authorize('edit', $product);
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->price = $request->get('price');
+        $product->save();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -98,9 +92,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if (Auth::user()->id == $product->user_id && $product->delete()) {
-            return redirect()->route('products.index');
-        }
-        return back();
+        $this->authorize('delete', $product);
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
